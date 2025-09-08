@@ -1,15 +1,16 @@
 package com.school;
 
 public class Course {
-    String courseId;
+    int courseId;
     String courseName;
+    private static int nextCourseIdCounter = 1;
 
-    public void setDetails(String id, String cName){
-        this.courseId = id;
-        this.courseName = cName;
+    public Course(String courseName) {
+        this.courseName = courseName;
+        this.courseId = nextCourseIdCounter++;
     }
 
     public void display(){
-        System.out.println("Course ID: "+this.courseId+" , Course Name: "+ this.courseName);
+        System.out.println("Course ID: C"+this.courseId+" , Course Name: "+ this.courseName);
     }
 }
