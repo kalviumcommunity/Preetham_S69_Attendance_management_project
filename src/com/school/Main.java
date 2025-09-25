@@ -4,27 +4,27 @@ import java.util.List;
 
 public class Main{
     public static void main(String[] args){
-        Student[] student = new Student[2];
-        student[0] = new Student("Tom","A");
-        student[1] = new Student("Karl","A");
-        Course[] course = new Course[2];
-        course[0] = new Course("abc");
-        course[1] = new Course("abd");
+        ArrayList<Student> students = new ArrayList<>();
+        students.add(new Student("Tom", "A"));
+        students.add(new Student("Karl", "A"));
+        ArrayList<Course> courses = new ArrayList<>();
+        courses.add(new Course("abc"));
+        courses.add(new Course("abd"));
         Teacher[] teachers = new Teacher[2];
         teachers[0] = new Teacher("Tom","English");
         teachers[1] = new Teacher("Karl","Computer Science");
         Staff[] staffs = new Staff[2];
         staffs[0] = new Staff("Tom","Main");
         staffs[1] = new Staff("Karl","Sub");
-        ArrayList<AttendanceRecord> attendanceLog = new ArrayList<AttendanceRecord>();
-        attendanceLog.add(new AttendanceRecord(student[0].getId(), course[0].getCourseId(), "Present"));
-        attendanceLog.add(new AttendanceRecord(student[1].getId(),course[1].getCourseId() ,"null"));
+        ArrayList<AttendanceRecord> records = new ArrayList<>();
+        records.add(new AttendanceRecord(students.get(0).getId(), courses.get(0).getCourseId(), "Present"));
+        records.add(new AttendanceRecord(students.get(1).getId(), courses.get(1).getCourseId(), "Absent"));
 
-        for(AttendanceRecord attend : attendanceLog){
+        for(AttendanceRecord attend : records){
             attend.displayRecord();
         }
 
-        for(Course c: course){
+        for(Course c: courses){
             c.display();
         }
 
@@ -36,5 +36,10 @@ public class Main{
             s.displayDetails();
         }
         System.out.println("Welcome");
+
+        FileStorageService storage = new FileStorageService();
+        storage.saveData(students, "students.txt");
+        storage.saveData(courses, "courses.txt");
+        storage.saveData(records, "attendance_log.txt");
 }       
 }
